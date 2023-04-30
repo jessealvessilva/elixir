@@ -9,7 +9,8 @@
 
   def handle_file_read({:ok, result}) do
     list = String.split(result, ",")
-    Enum.map( list, fn number -> String.to_integer( number) end )
+    # Chamada simplifica de função anônima
+    Enum.map( list, &String.to_integer( number/1) )
   end
 
 
