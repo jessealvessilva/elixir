@@ -1,26 +1,39 @@
  defmodule FizzBuzz do
-  def build(file_name) do
-      file = File.read( file_name )
-      handle_file_read(file)
-      # hello()
-    end
+  # def hello(name), do: "Hello, " <> name
 
-     def handle_file_read({:ok, result }) , do: result
-     def handle_file_read({:error, reason }) , do: reason
-#     # def hello(), do "Hello World"
-#   # end
+  # def build(file_name) do
+  #   file_name
+  #   |> File.read()
+  #   |> handle_file_read()
+  # end
 
-#     # def hello(), do: "Hello World"                              # hello/0
-#     # def hello(name), do "Hello, #{name}"                        # hello/1
-#     # def hello(name1, name2), do: "Hello, #{name1} and #{name2}" # hello/2
+  # Pattern matching com funções anônimas
 
-#   def build(file_name) do
-#   end
+  handle_result = fn
+    {:ok, result} -> IO.puts "Handling result..."
+    {:ok, _} -> IO.puts "This would be never run as previous will be matched beforehand."
+    {:error} -> IO.puts "An error has occurred!"
+  end
 
-# end
+  fred = %{
+    name: "Fred",
+    age: "95",
+    favorite_color: "Taupe"
+  }
 
-# defmodule FizzBuzz do
-#   def hello(), do: "Hello World"                              # hello/0
-#   end
+  def of([]), do: 0
+  def of([_ | tail]), do: 1 + of(tail)
+  # some_result = 1
 
+  # Invoca a função anônima
+  # handle_result.({:ok,_})
+
+  def hello(%{endereco: person_name, cidade: cidade }) do
+    IO.puts( "Hello, " <> cidade )
+  end
+
+  def hello2(%{name: person_name} = person) do
+    # IO.puts "Hello, " <> person_name
+    IO.inspect person
+  end
 end
