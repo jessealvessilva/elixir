@@ -15,5 +15,6 @@
 
   end
 
+  def handle_file_read({:error, reason}) , do:  "Erro reading the file #{ reason}"
 
 end
