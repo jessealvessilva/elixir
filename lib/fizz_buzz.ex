@@ -7,25 +7,28 @@
     |> handle_file_read()
   end
   # O result fica implicito como parâmetro na chamada da função String
-  def handle_file_read({:ok, result}) do
+  defp handle_file_read({:ok, result}) do
+    result =
     result
     |> String.split(",")
     |> Enum.map( &convert_and_valuate_numbers / 1  )
     # Chamada simplifica de função anônima
 
+    {:ok, result }
   end
 
-  def handle_file_read({:error, reason}) , do:  "Erro reading the file #{ reason}"
+  defp handle_file_read({:error, reason}) , do: {:error, "Erro reading the file: #{reason} "}
 
-  def convert_and_valuate_numbers(elem) do
-    number = String.to_integer( elem)
-    evaluate_numbers( number)
+  defp convert_and_valuate_numbers(elem) do
+    elem
+    |> String.to_integer( )
+    |> evaluate_numbers()
 
   end
 
-  def evaluate_numbers(number) when rem( number, 3 ) == 0 and rem( number, 3 ) == 0 ,  do: :fizzbuzz
-  def evaluate_numbers(number) when rem( number, 3 ) == 0,  do: :fizz
-  def evaluate_numbers(number) when rem( number, 5 ) == 0,  do: :buzz
-  def evaluate_numbers(number) ,  do: number
+  defp evaluate_numbers(number) when rem( number, 3 ) == 0 and rem( number, 3 ) == 0 ,  do: :fizzbuzz
+  defp evaluate_numbers(number) when rem( number, 3 ) == 0,  do: :fizz
+  defp evaluate_numbers(number) when rem( number, 5 ) == 0,  do: :buzz
+  defp evaluate_numbers(number) ,  do: number
 
 end
